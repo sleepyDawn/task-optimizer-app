@@ -1,3 +1,5 @@
+import { startSetEmployees } from "./employees";
+
 // SET_TEXT_FILTER
 export const setTextFilter = (text = "") => ({
   type: "SET_TEXT_FILTER",
@@ -9,6 +11,13 @@ export const setUnit = (unit) => ({
   type: "SET_UNIT",
   unit,
 });
+
+export const startSetUnit = (unit) => {
+  return (dispatch) => {
+    dispatch(setUnit(unit));
+    return dispatch(startSetEmployees());
+  };
+};
 
 // SET_SORT_BY_NAME
 export const setSortByName = () => ({

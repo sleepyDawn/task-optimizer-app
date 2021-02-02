@@ -1,6 +1,6 @@
 import { firebase, googleAuthProvider } from "../firebase/firebase";
 import database from "../firebase/firebase";
-import { setUnit } from "../actions/filters";
+import { startSetUnit } from "../actions/filters";
 
 export const login = (uid) => ({
   type: "LOGIN",
@@ -36,8 +36,8 @@ export const startAuthorizationOnLogin = (userData = {}, uid) => {
       .then(() => {
         // Adding user details to auth property in redux store.
         dispatch(addUser({ ...user }));
-        // Setting the unit for a user
-        dispatch(setUnit(user.unit));
+        // Setting the unit for a user and settin employees according to unit
+        return dispatch(startSetUnit(user.unit));
       });
   };
 };

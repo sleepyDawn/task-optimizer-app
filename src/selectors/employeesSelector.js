@@ -46,7 +46,7 @@ export default (
       return startDateMatch && endDateMatch;
     })
     .sort((a, b) => {
-      console.log(employees);
+      // console.log(employees);
       if (dueDateItem === "pme") {
         return a.lastPMEDate - b.lastPMEDate;
       } else if (dueDateItem === "vtc") {
