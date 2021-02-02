@@ -1,0 +1,27 @@
+.page-header {
+  background: $off-white;
+  margin-bottom: $l-size;
+  padding: 0 0 $m-size 0;
+}
+
+.page-header__nav {
+  margin-top: 0;
+}
+
+.page-header__title {
+  margin-top: $m-size;
+  font-weight: 300;
+
+  span {
+    font-weight: 700;
+  }
+}
+
+.page-header__navlink {
+  text-decoration: none;
+  padding-right: $s-size;
+}
+
+.is-active {
+  color: $red;
+}
