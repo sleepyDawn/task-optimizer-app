@@ -6,6 +6,18 @@
   padding: $s-size;
 }
 
+.text-input--pagination {
+  @extend .text-input;
+  height: 36px;
+  width: 36px;
+  padding: 0;
+  border-radius: 2px;
+}
+
+.text-input--readOnly {
+  background: #b1b0b0;
+}
+
 .select {
   @extend .text-input;
 }

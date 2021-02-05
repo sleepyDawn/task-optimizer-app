@@ -30,7 +30,6 @@ export const EmployeeList = (props) => (
 
 const mapStateToProps = (state) => {
   return {
-    employees: selectEmployees(state.employees, state.filters),
     dueDateItem: state.filters.dueDateItem,
   };
 };

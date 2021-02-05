@@ -10,6 +10,14 @@
   text-decoration: none;
 }
 
+.button--pagination {
+  @extend .button;
+  height: 36px;
+  width: 36px;
+  padding: 0;
+  border-radius: 2px;
+}
+
 .button--link {
   background: none;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import EmployeeList from "./EmployeeList";
+import Pagination from "../components/Pagination";
 import EmployeeListFilters from "./EmployeeListFilters";
 import EmployeesSummary from "./EmployeesSummary";
 
@@ -7,7 +7,7 @@ const EmployeeDashboardPage = () => (
   <div>
     <EmployeesSummary></EmployeesSummary>
     <EmployeeListFilters></EmployeeListFilters>
-    <EmployeeList></EmployeeList>
+    <Pagination></Pagination>
   </div>
 );
 
