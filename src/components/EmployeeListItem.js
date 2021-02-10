@@ -3,13 +3,10 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import { connect } from "react-redux";
 
-const EmployeeListItem = ({ employee, filters }) => {
+const EmployeeListItem = ({ employee, filters, authUser }) => {
   const { id, name, employeeId, lastPMEDate, lastVTCDate } = employee;
   let isAdminForEmployee;
-  if (
-    props.authUser.role === "admin" &&
-    props.authUser.unit === props.filters.unit
-  ) {
+  if (authUser.role === "admin" && authUser.unit === filters.unit) {
     isAdminForEmployee = true;
   }
 
