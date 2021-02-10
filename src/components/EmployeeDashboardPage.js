@@ -10,7 +10,7 @@ import EmployeesList from "./EmployeesList";
 const EmployeeDashboardPage = () => {
   const initialPaginationState = {
     startIndex: 0,
-    itemsPerPage: 2,
+    itemsPerPage: 10,
   };
   const [paginationState, dispatch] = useReducer(
     paginationReducer,

@@ -11,18 +11,18 @@ export const Header = ({
   startSetUnit,
   startSetEmployees,
 }) => {
-  const [unit, setUnit] = useState(filters.unit);
-  const onUnitSelection = (e) => {
-    setUnit(() => e.target.value);
-  };
-  useEffect(() => {
-    startSetUnit(unit);
-    if (unit) {
-      (async () => {
-        await startSetEmployees();
-      })();
-    }
-  }, [unit]);
+  const [unit] = useState(filters.unit);
+  // const onUnitSelection = (e) => {
+  //   setUnit(() => e.target.value);
+  // };
+  // useEffect(() => {
+  //   startSetUnit(unit);
+  //   if (unit) {
+  //     (async () => {
+  //       await startSetEmployees();
+  //     })();
+  //   }
+  // }, [unit]);
 
   return (
     <header className="header">
@@ -31,11 +31,13 @@ export const Header = ({
           <Link className="header__title" to="/dashboard">
             <h1>Task Optimizer</h1>
           </Link>
-          <select className="select" value={unit} onChange={onUnitSelection}>
-            <option value="BCCL-3-NAKC">NAKC</option>
-            <option value="BCCL-3-BLOCKIV">BLOCKIV</option>
-            <option value="BCCL-3-KHARKHAREE">KHARKHAREE</option>
-          </select>
+          <input
+            type="text"
+            placeholder="UNIT"
+            readOnly
+            className="text-input text-input--readOnly"
+            value={unit}
+          ></input>
           <button className="button button--link" onClick={startLogout}>
             Logout
           </button>

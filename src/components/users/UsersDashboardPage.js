@@ -9,7 +9,7 @@ import UsersList from "./UsersList";
 const UsersDashboardPage = () => {
   const initialPaginationState = {
     startIndex: 0,
-    itemsPerPage: 2,
+    itemsPerPage: 10,
   };
   const [paginationState, dispatch] = useReducer(
     paginationReducer,

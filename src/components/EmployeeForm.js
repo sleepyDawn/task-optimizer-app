@@ -160,6 +160,7 @@ class Employee extends React.Component {
           numberOfMonths={1}
           renderMonthElement={this.renderMonthElement}
           isOutsideRange={() => false}
+          id="asfdafdasfdsaasdasdaxzcdfadf42342342"
         ></SingleDatePicker>
         <p>Last VTC DATE</p>
         <SingleDatePicker
@@ -170,6 +171,7 @@ class Employee extends React.Component {
           numberOfMonths={1}
           renderMonthElement={this.renderMonthElement}
           isOutsideRange={() => false}
+          id="asfdafdasfdsadfadf42342342"
         ></SingleDatePicker>
         <div>
           <button className="button">
