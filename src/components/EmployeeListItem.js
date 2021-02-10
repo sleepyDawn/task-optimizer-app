@@ -33,12 +33,6 @@ const EmployeeListItem = ({ employee, filters }) => {
 
 const mapStateToProps = (state) => {
   return {
-    filters: state.filters,
-  };
-};
-
-const mapStateToProps = (state) => {
-  return {
     employees: totalEmployeesSelector(state.employees, state.filters),
     filters: state.filters,
     authUser: state.auth.authUser,
