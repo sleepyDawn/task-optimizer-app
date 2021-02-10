@@ -13,6 +13,14 @@ const EmployeesListTotal = (props) => {
     (employee, index) => index >= startIndex && index <= endIndex
   );
 
+  let isAdminForEmployee;
+  if (
+    props.authUser.role === "admin" &&
+    props.authUser.unit === props.filters.unit
+  ) {
+    isAdminForEmployee = true;
+  }
+
   return (
     <>
       <PaginationComponent
@@ -36,7 +44,11 @@ const EmployeesListTotal = (props) => {
                 <div key={employee.id}>
                   <Link
                     className="list-item"
-                    to={`/employees/edit/${employee.id}`}
+                    to={
+                      isAdminForEmployee
+                        ? `/employees/edit/${employee.id}`
+                        : "/employees"
+                    }
                   >
                     <div>
                       <h3 className="list-item__title">{`${employee.name}`}</h3>
@@ -57,6 +69,7 @@ const mapStateToProps = (state) => {
   return {
     employees: totalEmployeesSelector(state.employees, state.filters),
     filters: state.filters,
+    authUser: state.auth.authUser,
   };
 };
 
