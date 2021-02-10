@@ -1,13 +1,9 @@
 import React, { useReducer } from "react";
-import { connect } from "react-redux";
-
 import PaginationContext from "../context/pagination-context";
 import paginationReducer from "../reducers/paginationReducer";
-import EmployeeListFilters from "./EmployeeListFilters";
-import EmployeesSummary from "./EmployeesSummary";
-import EmployeesList from "./EmployeesList";
+import EmployeesListTotalPage from "./EmployeesListTotalPage";
 
-const EmployeeDashboardPage = () => {
+const EmployeesListTotalPageContext = () => {
   const initialPaginationState = {
     startIndex: 0,
     itemsPerPage: 2,
@@ -16,14 +12,12 @@ const EmployeeDashboardPage = () => {
     paginationReducer,
     initialPaginationState
   );
-
+  // console.log("in EmployeesListTotalPage", { paginationState });
   return (
     <PaginationContext.Provider value={{ paginationState, dispatch }}>
-      <EmployeesSummary></EmployeesSummary>
-      <EmployeeListFilters></EmployeeListFilters>
-      <EmployeesList></EmployeesList>
+      <EmployeesListTotalPage></EmployeesListTotalPage>
     </PaginationContext.Provider>
   );
 };
 
-export default EmployeeDashboardPage;
+export { EmployeesListTotalPageContext as default };

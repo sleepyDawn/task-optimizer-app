@@ -12,7 +12,7 @@ class UpdatePMEForm extends React.Component {
     super(props);
     this.state = {
       employee: props.employee,
-      lastPMEDate: moment(props.employee.lastPMEDate).add(3, "years"),
+      lastPMEDate: moment(),
       calendarFocusedPME: false,
       error: "",
     };
@@ -70,8 +70,9 @@ class UpdatePMEForm extends React.Component {
 
     if (
       !this.state.lastPMEDate ||
-      !this.state.lastPMEDate.isSameOrAfter(
-        moment(this.state.employee.lastPMEDate).add(3, "years")
+      !this.state.lastPMEDate.isAfter(
+        moment(this.state.employee.lastPMEDate),
+        "day"
       )
     ) {
       this.setState(() => ({

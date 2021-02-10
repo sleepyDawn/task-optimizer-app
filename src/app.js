@@ -8,7 +8,9 @@ import AppRouter, { history } from "./routers/appRouter";
 import configureStore from "./store/configureStore";
 import { startSetEmployees } from "./actions/employees";
 import { login, logout, startAuthorizationOnLogin } from "./actions/auth";
+import { startSetUsers, removeAllUsers } from "./actions/users";
 import LoadingPage from "./components/LoadingPage";
+import Error from "./components/Error";
 
 import "normalize.css/normalize.css";
 import "./styles/styles.scss";
@@ -39,26 +41,39 @@ const renderApp = () => {
 
 ReactDOM.render(<LoadingPage></LoadingPage>, rootElement);
 
-firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
+firebase.auth().onAuthStateChanged((authUser) => {
+  if (authUser) {
     // console.log({ user });
-    store.dispatch(login(user.uid));
-    const userName = user.displayName;
-    const emailId = user.email;
+
+    store.dispatch(login(authUser.uid));
+    const userName = authUser.displayName;
+    const emailId = authUser.email;
+
     store
-      .dispatch(startAuthorizationOnLogin({ userName, emailId }, user.uid))
+      .dispatch(startAuthorizationOnLogin({ userName, emailId }, authUser.uid))
       .then(() => {
+        // Setting the employees list in redux store
         return store.dispatch(startSetEmployees());
+      })
+      .then(() => {
+        // Setting the userslist state in store if loggedIn(authUser) is admin role with GLOBAL unit
+
+        return store.dispatch(startSetUsers());
       })
       .then(() => {
         renderApp();
         if (history.location.pathname === "/") {
           history.push("/dashboard");
         }
+      })
+      .catch((e) => {
+        console.log("Error: ", e);
+        ReactDOM.render(<Error message={e.message}></Error>, rootElement);
       });
   } else {
-    store.dispatch(logout());
     renderApp();
     history.push("/");
+    store.dispatch(logout());
+    store.dispatch(removeAllUsers());
   }
 });

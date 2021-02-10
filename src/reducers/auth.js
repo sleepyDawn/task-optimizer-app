@@ -6,10 +6,10 @@ export default (state = {}, action) => {
       };
     case "LOGOUT":
       return {};
-    case "ADD_USER":
+    case "ADD_AUTH_USER":
       return {
         ...state,
-        user: action.user,
+        authUser: action.authUser,
       };
     default:
       return state;

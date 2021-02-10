@@ -1,28 +1,31 @@
 import { firebase, googleAuthProvider } from "../firebase/firebase";
 import database from "../firebase/firebase";
-import { startSetUnit } from "../actions/filters";
+import { setUnit } from "../actions/filters";
 
 export const login = (uid) => ({
   type: "LOGIN",
   uid,
 });
 
-export const addUser = (user) => ({
-  type: "ADD_USER",
-  user,
-});
+export const addUser = (authUser) => {
+  return {
+    type: "ADD_AUTH_USER",
+    authUser,
+  };
+};
 
 // role can be user, controller, admin
-export const startAuthorizationOnLogin = (userData = {}, uid) => {
-  return (dispatch) => {
+export const startAuthorizationOnLogin = (authUserData = {}, uid) => {
+  return (dispatch, getState) => {
     const {
       userName = "",
       emailId = "",
-      role = "user", //admin, user, controller
-      unit = "BCCL-3-NAKC", // ["BCCL-3-NAKC", "BCCL-3-KHARKHAREE", "BCCL-3-BLOCKIV", "ADMIN-ALL"]
-    } = userData;
+      role = "user", //admin, default-user
+      unit = "", // ["BCCL-3-NAKC", "BCCL-3-KHARKHAREE", "BCCL-3-BLOCKIV", "ADMIN-ALL", "GLOBAL"]
+    } = authUserData;
 
-    const user = { userName, emailId, role, unit };
+    let authUser = { userName, emailId, role, unit };
+
     return database
       .ref(`users/${uid}`)
       .once("value")
@@ -30,14 +33,27 @@ export const startAuthorizationOnLogin = (userData = {}, uid) => {
         // console.log("cheking snapshot: ", snapshot.val());
         // Only adding new user to users reference in firebase database
         if (!snapshot.val()) {
-          return database.ref(`users/${uid}`).set(user);
+          database
+            .ref(`users/${uid}`)
+            .set({ userName: authUser.userName, emailId: authUser.emailId })
+            .then(() => {
+              // Adding user details to auth property in redux store.
+              dispatch(addUser(authUser));
+              // As new  user doesn't have any assigned uint and also not an admin, so no need to update the unit
+              // in filters object, they will have default unit for readonly purposes.
+            });
+        } else {
+          authUser = { ...authUser, ...snapshot.val() };
+          // Adding user details to auth property in redux store.
+          dispatch(addUser(authUser));
+          // Setting unit in filters for admin user, which may be other than default unit of filters state
+          if (authUser.role === "admin" && authUser.unit !== "GLOBAL") {
+            console.log("checking if it ran");
+            dispatch(setUnit(authUser.unit));
+          }
         }
-      })
-      .then(() => {
-        // Adding user details to auth property in redux store.
-        dispatch(addUser({ ...user }));
-        // Setting the unit for a user and settin employees according to unit
-        return dispatch(startSetUnit(user.unit));
+
+        // console.log("checking after addition of auth User");
       });
   };
 };

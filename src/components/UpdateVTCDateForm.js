@@ -12,7 +12,7 @@ class UpdateVTCDateForm extends React.Component {
     super(props);
     this.state = {
       employee: props.employee,
-      lastVTCDate: moment(props.employee.lastVTCDate).add(3, "years"),
+      lastVTCDate: moment(),
       calendarFocusedVTC: false,
       error: "",
     };
@@ -70,8 +70,9 @@ class UpdateVTCDateForm extends React.Component {
 
     if (
       !this.state.lastVTCDate ||
-      !this.state.lastVTCDate.isSameOrAfter(
-        moment(this.state.employee.lastVTCDate).add(3, "years")
+      !this.state.lastVTCDate.isAfter(
+        moment(this.state.employee.lastVTCDate),
+        "day"
       )
     ) {
       this.setState(() => ({

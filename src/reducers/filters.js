@@ -5,7 +5,7 @@ const filtersReducerDefaultState = {
   text: "",
   dueDateItem: "pme", // pme or vtc
   sortBy: "pmeDueDate", // name or employeeId or pmeDueDate or vtcDueDate
-  unit: "",
+  unit: "BCCL-3-NAKC", // Setting the unit for filtering employees data on basis of unit,BCCL-3-NAKC is default one
   startDate: moment().startOf("month"),
   endDate: moment().endOf("month"),
 };

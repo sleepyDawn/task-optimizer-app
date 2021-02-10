@@ -12,13 +12,6 @@ export const setUnit = (unit) => ({
   unit,
 });
 
-export const startSetUnit = (unit) => {
-  return (dispatch) => {
-    dispatch(setUnit(unit));
-    return dispatch(startSetEmployees());
-  };
-};
-
 // SET_SORT_BY_NAME
 export const setSortByName = () => ({
   type: "SET_SORT_BY_NAME",

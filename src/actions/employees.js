@@ -94,22 +94,28 @@ export const setEmployees = (employees) => ({
 export const startSetEmployees = () => {
   return (dispatch, getState) => {
     // const uid = getState().auth.uid;
+    // console.log("checking user unit", getState().filters.unit);
     const unit = getState().filters.unit;
-    return database
-      .ref(`employees/${unit}`)
-      .once("value")
-      .then((snapshot) => {
-        // console.log("checking snapshot: ", snapshot);
-        // console.log("checking snapshot: ", snapshot.val());
-        const employees = [];
-        snapshot.forEach((childSnapshot) => {
-          employees.push({
-            id: childSnapshot.key,
-            ...childSnapshot.val(),
+    if (unit) {
+      return database
+        .ref(`employees/${unit}`)
+        .once("value")
+        .then((snapshot) => {
+          // console.log("checking snapshot: ", snapshot);
+          // console.log("checking snapshot: ", snapshot.val());
+          const employees = [];
+          snapshot.forEach((childSnapshot) => {
+            employees.push({
+              id: childSnapshot.key,
+              ...childSnapshot.val(),
+            });
           });
+          // console.log(employees);
+          dispatch(setEmployees(employees));
         });
-        // console.log(employees);
-        dispatch(setEmployees(employees));
-      });
+    } else {
+      console.log("checking unit");
+      return Promise.resolve("Empty unit can't have employees");
+    }
   };
 };
