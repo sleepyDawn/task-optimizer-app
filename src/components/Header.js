@@ -11,7 +11,6 @@ export const Header = ({
   startSetUnit,
   startSetEmployees,
 }) => {
-  const [unit] = useState(filters.unit);
   // const onUnitSelection = (e) => {
   //   setUnit(() => e.target.value);
   // };
@@ -31,13 +30,9 @@ export const Header = ({
           <Link className="header__title" to="/dashboard">
             <h1>Task Optimizer</h1>
           </Link>
-          <input
-            type="text"
-            placeholder="UNIT"
-            readOnly
-            className="text-input text-input--readOnly"
-            value={unit}
-          ></input>
+          <h3 className="header__title">
+            {filters.unit && filters.unit.split("-")[2]}
+          </h3>
           <button className="button button--link" onClick={startLogout}>
             Logout
           </button>

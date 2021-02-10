@@ -7,7 +7,8 @@ import selectEmployees from "../selectors/employeesSelector";
 export const EmployeesSummary = ({ employeesCount, dueDateItem, endDate }) => {
   const employeesWord = employeesCount > 1 ? "employees" : "employee";
   const dueDateWord = dueDateItem === "pme" ? "PME" : "VTC";
-  const uptoDate = endDate.format("MMM Qo YYYY");
+
+  const uptoDate = endDate.format("MMM Do YYYY");
   // const formatExpensesTotal = ` ${numeral(expensesTotal).format("0,0.00")}`;
   return (
     <div className="page-header">

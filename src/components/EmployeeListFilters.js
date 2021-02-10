@@ -15,8 +15,10 @@ export const EmployeeListFilters = (props) => {
   const [endDate, setEndDate] = useState(props.filters.endDate);
 
   const onDateChange = (endDate) => {
-    setEndDate(endDate);
-    props.setEndDate(endDate);
+    if (endDate) {
+      setEndDate(endDate);
+      props.setEndDate(endDate);
+    }
   };
 
   const onFocusChange = ({ focused }) => {

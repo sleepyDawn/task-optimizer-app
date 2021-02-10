@@ -5,15 +5,24 @@ import { connect } from "react-redux";
 
 const EmployeeListItem = ({ employee, filters, authUser }) => {
   const { id, name, employeeId, lastPMEDate, lastVTCDate } = employee;
-  let isAdminForEmployee;
-  if (authUser.role === "admin" && authUser.unit === filters.unit) {
-    isAdminForEmployee = true;
+  let isAdminForEmployee = false;
+  // console.log("checking auth user: ", authUser);
+  if (authUser) {
+    if (
+      authUser.role === "admin" &&
+      (authUser.unit === filters.unit || authUser.unit === "GLOBAL")
+    ) {
+      isAdminForEmployee = true;
+    }
   }
+
+  // console.log("checking isAdmin for employee...", isAdminForEmployee);
 
   return (
     <Link
       className="list-item"
       to={isAdminForEmployee ? `/editPMEVTC/${id}` : "/dashboard"}
+      onClick={!isAdminForEmployee ? (e) => e.preventDefault() : undefined}
     >
       <div>
         <h3 className="list-item__title">{`${name}`}</h3>

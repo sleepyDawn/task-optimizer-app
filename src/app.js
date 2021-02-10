@@ -23,6 +23,7 @@ import { firebase } from "./firebase/firebase";
 
 const store = configureStore();
 // console.log("testing source map");
+// console.log("checking store after configuration::", store);
 
 const jsx = (
   <Provider store={store}>
@@ -61,6 +62,7 @@ firebase.auth().onAuthStateChanged((authUser) => {
         return store.dispatch(startSetUsers());
       })
       .then(() => {
+        console.log("checking before rendering app");
         renderApp();
         if (history.location.pathname === "/") {
           history.push("/dashboard");
@@ -73,7 +75,7 @@ firebase.auth().onAuthStateChanged((authUser) => {
   } else {
     renderApp();
     history.push("/");
+    store.dispatch({ type: "USER_LOGOUT" });
     store.dispatch(logout());
-    store.dispatch(removeAllUsers());
   }
 });

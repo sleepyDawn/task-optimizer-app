@@ -13,10 +13,11 @@ const EmployeesListTotal = (props) => {
     (employee, index) => index >= startIndex && index <= endIndex
   );
 
-  let isAdminForEmployee;
+  let isAdminForEmployee = false;
   if (
     props.authUser.role === "admin" &&
-    props.authUser.unit === props.filters.unit
+    (props.authUser.unit === props.filters.unit ||
+      props.authUser.unit === "GLOBAL")
   ) {
     isAdminForEmployee = true;
   }
@@ -48,6 +49,11 @@ const EmployeesListTotal = (props) => {
                       isAdminForEmployee
                         ? `/employees/edit/${employee.id}`
                         : "/employees"
+                    }
+                    onClick={
+                      !isAdminForEmployee
+                        ? (e) => e.preventDefault()
+                        : undefined
                     }
                   >
                     <div>

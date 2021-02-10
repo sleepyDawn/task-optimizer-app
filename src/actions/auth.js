@@ -44,12 +44,13 @@ export const startAuthorizationOnLogin = (authUserData = {}, uid) => {
             });
         } else {
           authUser = { ...authUser, ...snapshot.val() };
+
           // Adding user details to auth property in redux store.
           dispatch(addUser(authUser));
           // Setting unit in filters for admin user, which may be other than default unit of filters state
           if (authUser.role === "admin" && authUser.unit !== "GLOBAL") {
-            console.log("checking if it ran");
             dispatch(setUnit(authUser.unit));
+            console.log("checking after setting unit...");
           }
         }
 
