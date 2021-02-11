@@ -1,7 +1,15 @@
-# Git Commands
+# Task Optimizer App
 
-git init - Create a new git repo
-git status - View the changes to your project
-git add - Add files to staging area
-git commit - Creates a new commit with files from staging area
-git log - View recent commits
+## Features
+
+- You can track the periodic Medical Examination(PME) date of an employee
+- You can track the Vocation Training (VTC) date of an employee.
+- You can do CRUD operation an employee.
+- Pagination is avaliable for list of employees
+
+## Technologies
+
+- React with redux
+- webpack for Configuration
+- Google firebase for authentication and database
+- JavaScript, HTML, css and SASS.
