@@ -10,6 +10,6 @@
 ## Technologies
 
 - React with redux
-- webpack for Configuration
+- Webpack
 - Google firebase for authentication and database
-- JavaScript, HTML, css and SASS.
+- JavaScript, HTML and SCSS.
