@@ -1,11 +1,11 @@
-import React, { useReducer } from "react";
-import { connect } from "react-redux";
+import React, { useReducer } from 'react';
+import { connect } from 'react-redux';
 
-import PaginationContext from "../context/pagination-context";
-import paginationReducer from "../reducers/paginationReducer";
-import EmployeeListFilters from "./EmployeeListFilters";
-import EmployeesSummary from "./EmployeesSummary";
-import EmployeesList from "./EmployeesList";
+import PaginationContext from '../context/pagination-context';
+import paginationReducer from '../reducers/paginationReducer';
+import EmployeeListFilters from './EmployeeListFilters';
+import EmployeesSummary from './EmployeesSummary';
+import EmployeesList from './EmployeesList';
 
 const EmployeeDashboardPage = () => {
   const initialPaginationState = {

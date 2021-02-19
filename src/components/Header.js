@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { startLogout } from "../actions/auth";
-import { setUnit } from "../actions/filters";
-import { startSetEmployees } from "../actions/employees";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { startLogout } from '../actions/auth';
+import { setUnit } from '../actions/filters';
+import { startSetEmployees } from '../actions/employees';
 
 export const Header = ({
   startLogout,
@@ -31,7 +31,7 @@ export const Header = ({
             <h1>Task Optimizer</h1>
           </Link>
           <h3 className="header__title">
-            {filters.unit && filters.unit.split("-")[2]}
+            {filters.unit && filters.unit.split('-')[2]}
           </h3>
           <button className="button button--link" onClick={startLogout}>
             Logout
